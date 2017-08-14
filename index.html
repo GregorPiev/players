@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Kadabra, Plyers</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="lib/datatables/dataTables.bootstrap.css" type="text/css" />
+        <link rel="stylesheet" href="lib/tabletools/css/TableTools.css" type="text/css" />
+        <link href="lib/datatables/jquery.dataTables.min.css" rel="stylesheet">
+
+        <link href="css/style.css" rel="stylesheet" />
+        <script src="lib/jquery/jquery-1.9.1.min.js"></script>
+        <link href="lib/bootstrap/bootstrap.min.css" rel="stylesheet" />
+        <script src="lib/bootstrap/bootstrap.min.js"></script>
+
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row">
+                <div id="leftBlock"  class="col-sm-8 col-sm-offset-1">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <h1 class="col-sm-12 text-left page-header">Stored Data</h1>
+
+                            <div  class="form-group form-group-lg col-sm-4">
+                                <label class="label label-info">Brand</label>
+                                <select id="brand" class="form-control"></select>
+                            </div>
+                            <div  class="form-group form-group-lg col-sm-4">
+                                <label class="label label-info">Player</label>
+                                <select id="player" class="form-control"></select>
+                            </div>
+
+                        </div>
+                        <div class="panel-body">
+                            <div class="col-sm-12 table-responsive">
+                                <table class="table table-striped table-bordered table-hover"
+                                       data-display-rows="10"
+                                       data-info="true"
+                                       data-search="true"
+                                       data-length-change="true"
+                                       data-paginate="true"
+                                       id="dataStore">
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="rightBlock" class="col-sm-3">
+                    <div class="panel">
+                        <div class="panel-heading"><h2>Total values</h2></div>
+                        <div class="panel-body">
+                            <div id="totalDeposit" class="view-result">
+                                <label class="label label-info">Total Deposit</label>
+                                <span class="glyphicon glyphicon-usd" aria-hidden="true"></span>
+                            </div>
+                            <div id="totalRevenue" class="view-result">
+                                <label class="label label-info">Total Revenue</label>
+                                <span class="glyphicon glyphicon-usd" aria-hidden="true"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <script src="lib/datatables/jquery.dataTables.min.js"></script>
+        <script src="src/script.js"></script>
+    </body>
+</html>

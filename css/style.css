@@ -1,0 +1,53 @@
+@import "../lib/css/font-awesome.min.css";
+body {
+  padding: 0;
+  margin: 0;
+  font-size: 12px;
+}
+* {
+  padding: 0;
+  margin: 0;
+  text-align: left;
+  font-family: "Arial, Helvetica, sans-serif";
+  font-weight: normal;
+}
+#leftBlock {
+  padding-top: 15px;
+  background-color: lightblue;
+}
+#leftBlock h1 {
+  text-decoration: underline;
+}
+#leftBlock .panel-heading label {
+  font-size: 125%;
+  padding: 6px;
+}
+#leftBlock .panel-heading select {
+  margin-top: 20px;
+}
+#leftBlock .panel-heading input[type="button"] {
+  margin-top: 48px !important;
+}
+#leftBlock .panel-body .table-striped > thead > tr {
+  background-color: #ccc !important;
+}
+#leftBlock .panel-body .table-striped > tbody > tr:nth-of-type(odd) {
+  background-color: #f9f9f9 !important;
+}
+#leftBlock .panel-body .table-striped > tbody > tr:nth-of-type(odd) {
+  background-color: #e2e2e2 !important;
+}
+#rightBlock h2 {
+  text-decoration: underline;
+  margin-top: 54px;
+}
+#rightBlock .panel-body .view-result {
+  padding: 5px;
+  margin-bottom: 20px;
+  font-size: 150%;
+}
+#rightBlock .panel-body .view-result label {
+  font-size: 125%;
+  padding: 6px;
+}
+/*# sourceMappingURL=style.css.map */
