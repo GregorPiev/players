@@ -1,15 +1,12 @@
+<?php header('Access-Control-Allow-Origin: *'); ?>
+<?php header("Access-Control-Allow-Methods: POST, GET, OPTIONS"); ?>
+<?php header("Access-Control-Allow-Headers: *"); ?>
 <?php
 
 require_once './Database.php';
 $obj = Database::getConnection();
 $data = file_get_contents('php://input');
-//echo "<pre>";
-//print_r($data);
-//echo "</pre>";
 $json = json_decode($data);
-//echo "<pre>";
-//print_r($json);
-//echo "</pre>";
 
 $op = $json->{'op'};
 if (isset($op)) {
@@ -48,7 +45,8 @@ if (isset($op)) {
             $resp = array('code' => $code, 'msg' => $obj->getMsg());
             header('Content-type: application/json');
             header('Access-Control-Allow-Origin: *');
-            header('Access-Control-Allow-Methods: GET,POST');
+            header('Access-Control-Allow-Methods: GET,POST,DELETE,OPTION');
+            header('Access-Control-Allow-Headers: *');
             echo json_encode($resp);
             break;
         case 'initbrand';
@@ -57,7 +55,8 @@ if (isset($op)) {
             $resp = array('data' => $result, 'msg' => $obj->getMsg());
             header('Content-type: application/json');
             header('Access-Control-Allow-Origin: *');
-            header('Access-Control-Allow-Methods: GET,POST');
+            header('Access-Control-Allow-Methods: GET,POST,DELETE,OPTION');
+            header('Access-Control-Allow-Headers: *');
             echo json_encode($resp);
             break;
         case 'newbrand';
@@ -67,7 +66,8 @@ if (isset($op)) {
             $resp = array('data' => $result, 'msg' => $obj->getMsg());
             header('Content-type: application/json');
             header('Access-Control-Allow-Origin: *');
-            header('Access-Control-Allow-Methods: GET,POST');
+            header('Access-Control-Allow-Methods: GET,POST,DELETE,OPTION');
+            header('Access-Control-Allow-Headers: *');
             echo json_encode($resp);
             break;
         case 'newplayer';
@@ -77,7 +77,18 @@ if (isset($op)) {
             $resp = array('data' => $result, 'msg' => $obj->getMsg());
             header('Content-type: application/json');
             header('Access-Control-Allow-Origin: *');
-            header('Access-Control-Allow-Methods: GET,POST');
+            header('Access-Control-Allow-Methods: GET,POST,DELETE,OPTION');
+            header('Access-Control-Allow-Headers: *');
+            echo json_encode($resp);
+            break;
+        case 'showall';
+            $table = 'plyers';
+            $result = $obj->selectList(['playerId', 'day', 'market', 'affiliateId', 'campaign', 'acquisitionNumber', 'brand', 'device', 'currency', 'firstPlayed', 'lastPlayed', 'numberOfLifetimeDeposits', 'lifetimeDeposits', 'firstDepositAmount', 'isPlayerLocked', 'fraudLocked', 'negativeBrand', 'highRollerAdjusted', 'netRevenue', 'earnings', 'media', 'withdrawals'], $table, null);
+            $resp = array('data' => $result, 'msg' => $obj->getMsg());
+            header('Content-type: application/json');
+            header('Access-Control-Allow-Origin: *');
+            header('Access-Control-Allow-Methods: GET,POST,DELETE,OPTION');
+            header('Access-Control-Allow-Headers: *');
             echo json_encode($resp);
             break;
         case 'delete':
@@ -88,7 +99,8 @@ if (isset($op)) {
             $resp = $obj->deleteWithPictures($table, ['picture'], $query_conditional);
             header('Content-type: application/json');
             header('Access-Control-Allow-Origin: *');
-            header('Access-Control-Allow-Methods: GET,POST');
+            header('Access-Control-Allow-Methods: GET,POST,DELETE,OPTION');
+            header('Access-Control-Allow-Headers: *');
             echo json_encode($resp);
             break;
         default:

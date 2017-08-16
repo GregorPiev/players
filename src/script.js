@@ -63,8 +63,19 @@ class viewData {
         $.ajax({
             url: "http://gregportfolio.info/players/php/api.php",
             method: 'POST',
+            xhrFields: {
+                withCredentials: true
+            },
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'POST, GET, OPTIONS',
+                'Access-Control-Allow-Headers': '*',
+                'Access-Control-Allow-Credentials': 'true'
+            },
+            crossDomain: true,
             data: JSON.stringify(postdata),
             success: function (resp) {
+                $("#loading").hide();
                 console.log("%cSuccess Brand:" + JSON.stringify(resp), "color:blue");
                 $.each(resp.data, function (ind, val) {
                     let newBrandItem = "<option value='" + val.brand + "'>" + val.brand + "</option>";
@@ -73,10 +84,9 @@ class viewData {
                 let brandSelect = _this.dataBrands.join('');
                 $("#brand").append(brandSelect);
             },
-            error: function (error) {
-                console.log("%cError insertData:" + JSON.stringify(error), "color:#f00");
+            error: function (xhr, status, error) {
+                console.log("%cError insertData:" + xhr.statusText + '- ' + xhr.responseText, "color:#f00");
             }
-
         });
 
 
@@ -92,14 +102,29 @@ class viewData {
         };
         $.ajax({
             url: "http://gregportfolio.info/players/php/api.php",
-            method: 'POST',
+            type: 'POST',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
+            },
+            xhrFields: {
+                withCredentials: true
+            },
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'GET,POST,PUT,DELETE,OPTIONS',
+                'Access-Control-Allow-Headers': 'Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With',
+                'Access-Control-Allow-Credentials': 'true'
+            },
+            crossDomain: true,
             data: JSON.stringify(postdata),
-            success: function (resp) {
+
+            success: function (resp, textStatus, request) {
+                console.log("%cSuccess insertData textStatus:" + textStatus, "color:blue");
                 console.log("%cSuccess insertData:" + JSON.stringify(resp), "color:blue");
                 _this.setSelectBranch();
             },
-            error: function (error) {
-                console.log("%cError insertData:" + JSON.stringify(error), "color:#f00");
+            error: function (xhr, status, error) {
+                console.log("%cError insertData:" + xhr.statusText + " - " + xhr.responseText, "color:#f00");
             }
 
         });
@@ -167,15 +192,29 @@ class viewData {
         };
         $.ajax({
             url: "http://gregportfolio.info/players/php/api.php",
-            method: 'POST',
+            type: 'POST',
+            xhrFields: {
+                withCredentials: true
+            },
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'POST, GET, OPTIONS',
+                'Access-Control-Allow-Headers': '*',
+                'Access-Control-Allow-Credentials': 'true'
+            },
+            crossDomain: true,
             data: JSON.stringify(postdata),
-            success: function (resp) {
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
+            },
+            success: function (resp, textStatus, request) {
+                $("#loading").hide();
                 console.log("%cSuccess Choose Brand:" + JSON.stringify(resp), "color:blue");
                 _this.dataStoreSave = resp.data;
                 _this.initDataTable();
             },
-            error: function (error) {
-                console.log("%cError insertData:" + JSON.stringify(error), "color:#f00");
+            error: function (xhr, status, error) {
+                console.log("%c" + xhr.statusText + " choosedBrand: " + xhr.responseText, "color:#f00");
             }
 
         });
@@ -188,54 +227,124 @@ class viewData {
         };
         $.ajax({
             url: "http://gregportfolio.info/players/php/api.php",
-            method: 'POST',
+            type: 'POST',
+            xhrFields: {
+                withCredentials: true
+            },
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'POST, GET, OPTIONS',
+                'Access-Control-Allow-Headers': '*',
+                'Access-Control-Allow-Credentials': 'true'
+            },
+            crossDomain: true,
             data: JSON.stringify(postdata),
-            success: function (resp) {
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
+            },
+            success: function (resp, textStatus, request) {
+                $("#loading").hide();
                 console.log("%cSuccess Choose Player:" + JSON.stringify(resp), "color:blue");
                 _this.dataStoreSave = resp.data;
                 _this.initDataTable();
             },
-            error: function (error) {
-                console.log("%cError Choose Player:" + JSON.stringify(error), "color:#f00");
+            error: function (xhr, status, error) {
+                console.log("%c" + xhr.statusText + " choosedPlayer: " + xhr.responseText, "color:#f00");
             }
 
         });
     }
+    chooseAll() {
+        let _this = this;
+        var postdata = {
+            op: 'showall'
+        };
+        $.ajax({
+            url: "http://gregportfolio.info/players/php/api.php",
+            type: 'POST',
+            xhrFields: {
+                withCredentials: true
+            },
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'POST, GET, OPTIONS',
+                'Access-Control-Allow-Headers': '*',
+                'Access-Control-Allow-Credentials': 'true'
+            },
+            crossDomain: true,
+            data: JSON.stringify(postdata),
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
+            },
+            success: function (resp, textStatus, request) {
+                $("#loading").hide();
+                console.log("%cSuccess Choose Player:" + JSON.stringify(resp), "color:blue");
+                _this.dataStoreSave = resp.data;
+                _this.initDataTable();
+            },
+            error: function (xhr, status, error) {
+                console.log("%c" + xhr.statusText + " choosedPlayer: " + xhr.responseText, "color:#f00");
+            }
 
+        });
+    }
 }
 
 $(document).ready(function () {
     let vwDat = new viewData();
-
     $.ajax({
         url: "http://gregportfolio.info/players/source/players.xml",
-        method: 'GET',
+        type: 'GET',
+        xhrFields: {
+            withCredentials: true
+        },
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'POST, GET, OPTIONS',
+            'Access-Control-Allow-Headers': '*',
+            'Access-Control-Allow-Credentials': 'true'
+        },
+        crossDomain: true,
         dataType: "xml",
-        success: function (xml) {
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
+            $("#loading").show();
+        },
+        success: function (xml, textStatus, request) {
+            $("#loading").hide();
             console.log("XML:" + xml);
             var player = $(xml).find('player');
             console.log("player:" + player);
             vwDat.setData(player);
         },
-        error: function (err) {
-            console.info("%cError Message:" + err, "color:red;");
+        error: function (xhr, status, error) {
+            console.info("%c:" + xhr.statusText + " get XML: " + xhr.responseText, "color:red;");
         }
 
-    });
+    }
+    );
 
     $("#brand").on('change', function () {
-        if ($(this).val() === -1) {
+        if ($(this).val() === "-1") {
             alert("Plese, chose value");
         } else {
+            $("#loading").show();
             vwDat.choosedBrand($(this).val());
         }
     });
     $("#player").on('change', function () {
-        if ($(this).val() === -1) {
+        if ($(this).val() === "-1") {
             alert("Plese, chose value");
         } else {
+            $("#loading").show();
             vwDat.choosedPlayer($(this).val());
         }
+    }
+    );
+
+    $("#showAll").on('click', function () {
+        $("#loading").show();
+        vwDat.chooseAll();
     });
 });
 

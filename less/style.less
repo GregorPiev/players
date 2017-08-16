@@ -17,6 +17,7 @@ body{
     padding-top: 15px;
     background-color: lightblue;
     h1{text-decoration: underline;}
+
     .panel-heading{
         label{
             font-size: 125%;
@@ -30,6 +31,13 @@ body{
         }
     }
     .panel-body{
+        #loading{
+            position: absolute;
+            top: 250px;
+            left: 100px;
+            z-index: 10000;
+            display: none;
+        }
         .table-striped>thead>tr{
             background-color: #ccc !important;
         }

@@ -28,6 +28,13 @@ body {
 #leftBlock .panel-heading input[type="button"] {
   margin-top: 48px !important;
 }
+#leftBlock .panel-body #loading {
+  position: absolute;
+  top: 250px;
+  left: 100px;
+  z-index: 10000;
+  display: none;
+}
 #leftBlock .panel-body .table-striped > thead > tr {
   background-color: #ccc !important;
 }
